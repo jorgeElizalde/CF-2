@@ -1,0 +1,56 @@
+<div class="card">
+  <div class="card-body">
+    <h3 class="card-title my-3 text-center">Iniciar Sesión. </h3>
+      <div>
+        <form [formGroup]="data" (ngSubmit)="login()">
+          <div class="form-group">
+            <label for="user">Email</label>
+            <input type="text" class="form-control" formControlName="email">
+          </div>
+          <div class="form-group">
+              <label for="pwd">Contraseña</label>
+              <input type="password" class="form-control" formControlName="pass">
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-outline-success btn-block" [disabled]="data.invalid">Entrar</button>
+          </div>
+          <div class="form-group">
+            <p class="text-center"><a class="btn btn-outline-secondary" data-toggle="modal" data-target="#recoveryPass">Olvide mi Contraseña</a></p>
+          </div>
+          <div class="form-group">
+            <p class="text-center" (click)="login()">Iniciar Sesión con <i class="fab fa-google fa-2x"></i> </p>
+          </div>
+          <div class="form-group">
+            <p>¿Aún no tienes una Cuenta..? <a routerLink='/register'> Registrate</a></p>
+          </div>
+        </form>
+      </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="recoveryPass" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Recuperar Contraseña</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="recover" (ngSubmit)="recoveryPass()">
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Email:</label>
+            <input type="text" class="form-control" formControlName="email">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Reestablecer Contraseña</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

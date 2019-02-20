@@ -1,0 +1,182 @@
+
+<div class="container mt-5">
+  <div class="col-sm-12 col-md-12 d-flex justify-content-end mt-5">
+    <button class="btn btn-outline-info" data-toggle="modal" data-target="#eventModal">Crear Evento</button>
+  </div>
+</div>
+
+<section class="container my-4">
+  <div>
+    <h2>Eventos Creados</h2>
+    <hr>
+    <div class="container my-4 d-flex justify-content-center" *ngFor="let evento of eventos">
+        <div class="card w-85">
+            <div class="card-body">
+              <h5 class="card-title text-center">{{evento.nombre}}</h5>
+              <div class="row">
+                <div class="col-6">
+                  <p class="card-text">Organizado por: {{evento.organizador}}</p>
+                  <p class="card-text">Registro: Del 
+                        {{evento.fechaRegfrom.day}}/{{evento.fechaRegfrom.month}}/{{evento.fechaRegfrom.year}}
+                     Al {{evento.fechaRegto.day}}/{{evento.fechaRegto.month}}/{{evento.fechaRegto.year}}
+                  </p>
+                  <p class="card-text">Competencia: Del 
+                    {{evento.fechaEvfrom.day}}/{{evento.fechaEvfrom.month}}/{{evento.fechaEvfrom.year}}
+                    al {{evento.fechaEvto.day}}/{{evento.fechaEvto.month}}/{{evento.fechaEvto.year}}
+                  </p>
+                </div>
+                <div class="col-6">
+                  <p class="card-text">Categorias: {{evento.categories}}</p>
+                  <p class="card-text">Cuota de Inscripcion: {{evento.price}}</p>
+                  <p class="card-text">Dirección: {{evento.direction}} </p>
+                  <p class="card-text">Contacto: {{evento.contact}} </p>
+                </div>
+                <div class="col-12">
+                    <p class="card-text">{{evento.desc}}</p>
+                </div>
+              </div>
+              
+            </div>
+          </div> 
+    </div>
+  </div>
+</section>
+
+
+<!-- Modal -->
+<div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">Nuevo Evento</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <form [formGroup]="formulario" (ngSubmit)="saveEvent()">
+                <div class="form-group" [ngClass]="{'was-validated': formulario.get('nombre').valid}">
+                  <label for="">Nombre del Evento</label>
+                  <input type="text" class="form-control" formControlName="nombre">
+                  <div *ngIf="formulario.controls['nombre'].errors?.required" class="form-control-feedback">
+                      El Nombre del Evento es Requerido.
+                  </div>
+                  <div *ngIf="formulario.controls['nombre'].errors?.minlength" class="form-control-feedback">
+                      Mínimo 3 Caracteres.
+                  </div>
+                </div>
+                <div class="form-group" [ngClass]="{'was-validated': formulario.get('organizador').valid}">
+                  <label for="">Organizado por</label>
+                  <input type="text" class="form-control" formControlName="organizador">
+                  <div *ngIf="formulario.controls['organizador'].errors?.required" class="form-control-feedback">
+                      El Nombre del Organizador es Requerido.
+                  </div>
+                  <div *ngIf="formulario.controls['organizador'].errors?.minlength" class="form-control-feedback">
+                      Mínimo 3 Caracteres.
+                  </div>
+                </div>
+                <div class="form-group">
+                    <label for="">Fechas de Registro</label>
+                    <div class="row">
+                      <div class="col-6">
+                        <label for="">Del</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" ngbDatepicker #drf="ngbDatepicker"  formControlName="fechaRegfrom" (click)="drf.toggle()" readonly>
+                            <div class="input-group-prepend">
+                              <div class="input-group-text" (click)="drf.toggle()"> <i class="far fa-calendar"></i> </div>
+                            </div>
+                            <div *ngIf="formulario.controls['fechaRegfrom'].errors?.required" class="form-control-feedback">
+                                La Fecha es Requerida.
+                            </div>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                          <label for="">Al</label>
+                          <div class="input-group">
+                              <input type="text" class="form-control" ngbDatepicker #drt="ngbDatepicker"  formControlName="fechaRegto" (click)="drt.toggle()" readonly>
+                              <div class="input-group-prepend">
+                                <div class="input-group-text" (click)="drt.toggle()"> <i class="far fa-calendar"></i> </div>
+                              </div>
+                              <div *ngIf="formulario.controls['fechaRegto'].errors?.required" class="form-control-feedback">
+                                  La Fecha es Requerida.
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                    
+                </div>
+                <div class="form-group">
+                    <label for="">Fechas del Evento</label>
+                    <div class="row">
+                        <div class="col-6">
+                          <label for="">Del</label>
+                          <div class="input-group">
+                              <input type="text" class="form-control" ngbDatepicker #df="ngbDatepicker"  formControlName="fechaEvfrom" (click)="df.toggle()" readonly>
+                              <div class="input-group-prepend">
+                                <div class="input-group-text" (click)="df.toggle()"> <i class="far fa-calendar"></i> </div>
+                              </div>
+                              <div *ngIf="formulario.controls['fechaEvfrom'].errors?.required" class="form-control-feedback">
+                                  La Fecha es Requerida.
+                              </div>
+                          </div>
+                        </div>
+                        <div class="col-6">
+                            <label for="">Al</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" ngbDatepicker #dt="ngbDatepicker"  formControlName="fechaEvto" (click)="dt.toggle()" readonly>
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text" (click)="dt.toggle()"> <i class="far fa-calendar"></i> </div>
+                                </div>
+                                <div *ngIf="formulario.controls['fechaEvto'].errors?.required" class="form-control-feedback">
+                                    La Fecha es Requerida.
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                </div>
+                <div class="form-group">
+                  <label for="">Categorias Disponibles</label>
+                  <input type="text" class="form-control" formControlName="categories">
+                </div>
+                <div class="form-group" [ngClass]="{'was-validated': formulario.get('price').valid}">
+                  <label for="">Costo:</label>
+                  <input type="text" class="form-control" formControlName="price" maxlength="6">
+                  <div *ngIf="formulario.controls['price'].errors?.pattern" class="form-control-feedback">
+                      Solo Números.
+                  </div>
+                  <div *ngIf="formulario.controls['price'].errors?.required" class="form-control-feedback">
+                      El Costo es Requerido.
+                  </div>
+                </div>
+                <div class="form-group" [ngClass]="{'was-validated': formulario.get('direction').valid}">
+                  <label for="">Dirección</label>
+                  <input type="text" class="form-control" formControlName="direction">
+                  <div *ngIf="formulario.controls['direction'].errors?.required" class="form-control-feedback">
+                      La Dirección es Requerida.
+                  </div>
+                </div>
+                <div class="form-group" [ngClass]="{'was-validated': formulario.get('contact').valid}">
+                  <label for="">Número de Contacto</label>
+                  <input type="text" class="form-control" formControlName="contact" maxlength="10">
+                  <div *ngIf="formulario.controls['contact'].errors?.required" class="form-control-feedback">
+                      El Contacto es Requerido.
+                  </div>
+                  <div *ngIf="formulario.controls['contact'].errors?.pattern" class="form-control-feedback">
+                      Solo Números.
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="">Descripción</label>
+                  <textarea rows="3" class="form-control" formControlName="desc"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-outline-success" [disabled]="formulario.invalid">Guardar</button>
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

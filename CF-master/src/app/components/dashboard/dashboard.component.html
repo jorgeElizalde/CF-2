@@ -1,0 +1,48 @@
+<div id="container">
+
+  <div class="target" *ngFor="let evento of allevents; let idx = index">
+    <h5>{{evento.nombre}}</h5>
+    <div class="content">
+      <div class="t_field">
+        <div class="t_row">Organizador</div>
+        <div class="t_row">{{evento.organizador}}</div>
+      </div>
+      <div class="t_field">
+        <div class="t_row">Categorias</div>
+        <div class="t_row">{{evento.categories}}</div>
+      </div>
+      <div class="t_field">
+        <div class="t_row">Cuota de Inscripcion</div>
+        <div class="t_row">{{evento.price}}</div>
+      </div>
+      <div class="t_field">
+        <div class="t_row">Dirección</div>
+        <div class="t_row">{{evento.direction}}</div>
+      </div>
+      <div class="t_field">
+        <div class="t_row">Contacto</div>
+        <div class="t_row">{{evento.contact}}</div>
+      </div>
+      <div class="t_field">
+        <div class="t_row">Registro inicio - fin</div>
+        <div class="t_row">
+          {{evento.fechaRegfrom.day}}/{{evento.fechaRegfrom.month}}/{{evento.fechaRegfrom.year}}
+          al
+          {{evento.fechaRegto.day}}/{{evento.fechaRegto.month}}/{{evento.fechaRegto.year}}
+        </div>
+      </div>
+      <div class="t_field">
+        <div class="t_row">Competencia inicio - fin</div>
+        <div class="t_row">
+          {{evento.fechaEvfrom.day}}/{{evento.fechaEvfrom.month}}/{{evento.fechaEvfrom.year}}
+          al
+          {{evento.fechaEvto.day}}/{{evento.fechaEvto.month}}/{{evento.fechaEvto.year}}
+        </div>
+      </div>
+      <div class="t_desc">
+        Descripción: {{evento.desc}}
+      </div>
+    </div>
+  </div>
+    
+</div>

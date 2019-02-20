@@ -1,0 +1,22 @@
+
+<nav id="header" class="">
+  <div id="contain-header">
+    <a id="title" routerLink='/home'>EvemtCross</a>
+    <div id="menu">
+      <ul>
+        <li routerLinkActive="active" *ngIf="!auth.user.uid">
+          <a class="btn_nav" routerLink='/login'> Iniciar Sesión</a>
+        </li>
+        <li routerLinkActive="active" *ngIf="!auth.user.uid">
+          <a class="btn_nav" routerLink="/register"> Registrarme</a>
+        </li>
+        <li routerLinkActive="active" *ngIf="auth.user.uid">
+          <a class="btn_nav" routerLink='/event'> Crear Evento</a>
+        </li>
+        <div id="exit" *ngIf="auth.user.uid">
+          <button class="btn_nav" (click)="auth.logout()">Salir</button>
+        </div>
+      </ul>
+    </div>
+  </div>
+</nav>

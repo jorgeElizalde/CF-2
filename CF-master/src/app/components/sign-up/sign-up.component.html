@@ -1,0 +1,49 @@
+
+<div class="container">
+  <div>
+    <h1>Unete a EventCF</h1>
+    <p>La mejor forma de Crear y Organizar tus Eventos Deportivos.</p>
+  </div>
+</div>
+<div class="container my-4">
+  <div class="col-sm-12 col-md-6 col-lg-6">
+      <form [formGroup]='newUser' (ngSubmit)='createAccount()'>
+        <div class="form-group" [ngClass]="{'was-validated': newUser.get('nombre').valid}">
+          <label for="">Nombre</label>
+          <input type="text" class="form-control" placeholder="Nombre" formControlName='nombre' maxlength="50">
+            <div *ngIf="newUser.controls['nombre'].errors?.required" class="form-control-feedback">
+              El Nombre es Requerido.
+            </div>
+            <div *ngIf="newUser.controls['nombre'].errors?.minlength" class="form-control-feedback">
+              Minimo 5 Caracteres.
+            </div>
+        </div>
+        <div class="form-group" [ngClass]="{'was-validated': newUser.get('correo').valid}">
+          <label for="">Correo</label>
+          <input type="email" class="form-control" formControlName='correo' maxlength="50">
+          <div *ngIf="newUser.controls['correo'].errors?.required" class="form-control-feedback">
+            El Correo es Requerido.
+          </div>
+          <div *ngIf="newUser.controls['correo'].errors?.pattern" class="form-control-feedback">
+            Debe ser un Correo Valido.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="">Contraseña</label>
+          <input type="password" class="form-control" formControlName='contrasena' maxlength="50">
+          <div *ngIf="newUser.controls['contrasena'].errors?.required" class="form-control-feedback">
+            La Contraseña es Requerida.
+          </div>
+          <div *ngIf="newUser.controls['contrasena'].errors?.minlength" class="form-control-feedback">
+            Minimo 5 Caracteres.
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-outline-success" [disabled]="newUser.invalid">Crear Cuenta</button>
+          <span class="text-rigth" (click)="signupWGoogle()"> ó Ingrese con <i class="fab fa-google"></i></span>
+        </div>
+        <p>Ya tengo una Cuenta. <a routerLink='/login'>Iniciar Sesión</a></p>
+      </form>
+  </div>
+  
+</div>

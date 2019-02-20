@@ -1,0 +1,15 @@
+.login {
+    width: 100% !important;
+}
+
+.card,
+.card-body {
+    float: right;
+    width: 330px;
+}
+
+.card {
+    top: 0px;
+    right: 20px;
+    position: absolute;
+}
